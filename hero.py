@@ -5,6 +5,7 @@
 from ability import Ability
 from armor import Armor
 from weapon import Weapon
+from team import Team
 
 class Hero:
     """Class for hero objects."""
@@ -31,6 +32,10 @@ class Hero:
     def add_ability(self, ability):
         """Append ability to self.abilities."""
         self.abilities.append(ability)
+
+    def add_weapon(self, weapon):
+        """"Append weapon to self.abilities."""
+        self.abilities.append(weapon)
 
     def add_armor(self, armor):
         """Append armor to self.armors."""
@@ -66,6 +71,8 @@ if __name__ == "__main__":
     frieza = Hero("Frieza")
     # kamehameha = Ability("Kamehameha", 10)
     # death_beam = Ability("Death Beam", 10)
+    bansho_fan = Weapon("Bansho Fan", 20)
     # goku.add_ability(kamehameha)
     # frieza.add_ability(death_beam)
-    goku.fight(frieza)
+    goku.add_weapon(bansho_fan)
+    print(goku.attack())
