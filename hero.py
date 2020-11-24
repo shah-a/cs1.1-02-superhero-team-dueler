@@ -32,7 +32,7 @@ class Hero:
             winner.add_kill(1)
             loser.add_death(1)
 
-            print(f"{winner.name} won!")
+            print(f"{winner.name} won against {loser.name}!")
         else:
             print("Draw!")
 
