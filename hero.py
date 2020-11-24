@@ -3,9 +3,8 @@
 # CS1.1 Assignment 2: Superhero Team Dueler
 
 from ability import Ability
-from armor import Armor
 from weapon import Weapon
-from team import Team
+from armor import Armor
 
 class Hero:
     """Class for hero objects."""
@@ -82,13 +81,13 @@ class Hero:
         """Return True or False depending on whether hero has health remaining."""
         return False if self.current_health <= 0 else True
 
-# if __name__ == "__main__":
-    # goku = Hero("Goku")
-    # frieza = Hero("Frieza")
-    # kamehameha = Ability("Kamehameha", 10)
-    # death_beam = Ability("Death Beam", 10)
-    # power_pole = Weapon("Power Pole", 10)
-    # goku.add_ability(kamehameha)
-    # frieza.add_ability(death_beam)
-    # goku.add_weapon(power_pole)
-    # goku.fight(frieza)
+if __name__ == "__main__":
+    goku = Hero("Goku")
+    frieza = Hero("Frieza")
+    kamehameha = Ability("Kamehameha", 10)
+    death_beam = Ability("Death Beam", 10)
+    power_pole = Weapon("Power Pole", 10)
+    goku.add_ability(kamehameha)
+    frieza.add_ability(death_beam)
+    goku.add_weapon(power_pole)
+    goku.fight(frieza)
