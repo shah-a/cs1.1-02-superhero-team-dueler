@@ -17,15 +17,23 @@ class Hero:
         self.current_health = starting_health
         self.abilities = []
         self.armors = []
+        self.kills = 0
+        self.deaths = 0
 
     def fight(self, opponent):
         """Duels heroes (self and opponent)."""
+
         if self.abilities or opponent.abilities:
             while (self.is_alive() and opponent.is_alive()):
                 opponent.take_damage(self.attack())
                 self.take_damage(opponent.attack())
-            winner = self.name if self.is_alive() else opponent.name
-            print(f"{winner} won!")
+
+            winner = self if self.is_alive() else opponent
+            loser = opponent if self.is_alive() else self
+            winner.add_kill(1)
+            loser.add_death(1)
+
+            print(f"{winner.name} won!")
         else:
             print("Draw!")
 
@@ -41,6 +49,14 @@ class Hero:
         """Append armor to self.armors."""
         self.armors.append(armor)
 
+    def add_kill(self, num_kills):
+        """Update self.kills by num_kills amount"""
+        self.kills += num_kills
+
+    def add_death(self, num_deaths):
+        """Update self.deaths by num_deaths amount"""
+        self.deaths += num_deaths
+
     def attack(self):
         """Calculate total damage from all abilities."""
         total_damage = 0
@@ -48,31 +64,31 @@ class Hero:
             total_damage += ability.attack()
         return total_damage
 
-    def defend(self, damage_amt):
+    def defend(self):
         """Calculate total defense from all armors."""
         total_defense = 0
         for armor in self.armors:
             total_defense += armor.block()
-        if damage_amt - total_defense < 0:
-            return 0
-        else:
-            return damage_amt - total_defense
+        return total_defense
 
     def take_damage(self, damage):
         """Adjusts hero's health after taking an attack."""
-        self.current_health -= self.defend(damage)
+        if damage - self.defend() < 0:
+            self.current_health -= 0
+        else:
+            self.current_health -= (damage - self.defend())
 
     def is_alive(self):
         """Return True or False depending on whether hero has health remaining."""
         return False if self.current_health <= 0 else True
 
-if __name__ == "__main__":
-    goku = Hero("Goku")
-    frieza = Hero("Frieza")
+# if __name__ == "__main__":
+    # goku = Hero("Goku")
+    # frieza = Hero("Frieza")
     # kamehameha = Ability("Kamehameha", 10)
     # death_beam = Ability("Death Beam", 10)
-    bansho_fan = Weapon("Bansho Fan", 20)
+    # power_pole = Weapon("Power Pole", 10)
     # goku.add_ability(kamehameha)
     # frieza.add_ability(death_beam)
-    goku.add_weapon(bansho_fan)
-    print(goku.attack())
+    # goku.add_weapon(power_pole)
+    # goku.fight(frieza)
